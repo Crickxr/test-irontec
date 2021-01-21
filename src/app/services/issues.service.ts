@@ -18,7 +18,6 @@ export class IssuesService {
   }
 
   getNumberOfIssues() {
-    // var m = this.http.get(`https://api.github.com/repos/ionic-team/ionic-framework`).subscribe( (res: any) => { n = res.open_issues});
     return this.http.get(`https://api.github.com/repos/ionic-team/ionic-framework`);
   }
 }
