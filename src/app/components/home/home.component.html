@@ -1,0 +1,19 @@
+
+<div class="content">
+    <mat-card class="issues-card">
+        <mat-card-header class="issues-header">
+            <h1>Ionic framework issues list</h1>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="issue-container">
+            <div class="issue-row" *ngFor="let issue of issuesData">
+                {{issue.title}}
+                <div class="label-list">
+                    <mat-basic-chip *ngFor="let label of issue.labels" [style.backgroundColor]="label.color">
+                        {{label.name}}
+                    </mat-basic-chip>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
