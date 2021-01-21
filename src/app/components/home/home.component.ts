@@ -160,13 +160,24 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  length = 500;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
   constructor(
     public issuesService: IssuesService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.issuesData);
-    this.issuesService.getIssuesData().subscribe( res => {
+    this.setIssuesData();
+    this.getIssuesLength();
+  }
+
+  setIssuesData(page?: number, per_page?: number) {
+    if(!page) page = 1;
+    if(!per_page) per_page = 10;
+    this.issuesService.getIssuesData(page, per_page).subscribe( res => {
       console.log(res);
       if(res) {
         this.issuesData = [];
@@ -181,6 +192,18 @@ export class HomeComponent implements OnInit {
         console.log(this.issuesData, "after")
       }
     });
+  }
+
+  getIssuesLength() {
+    this.issuesService.getNumberOfIssues().subscribe( (res: any) => { this.length = res.open_issues});
+    console.log('a',this.length);
+  }
+
+  handlePaginatorEvent(data: any) {
+    console.log('data: ',data);
+    this.pageSize = data.pageSize;
+    this.pageIndex = data.pageIndex;
+    this.setIssuesData(data.pageIndex + 1, data.pageSize);
   }
 
 }

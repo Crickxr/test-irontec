@@ -14,6 +14,13 @@
                     </mat-basic-chip>
                 </div>
             </div>
+            <mat-paginator
+                (page)="handlePaginatorEvent($event)"
+                [length]="length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageIndex"
+                [pageSizeOptions]="pageSizeOptions">
+            </mat-paginator>
         </mat-card-content>
     </mat-card>
 </div>
